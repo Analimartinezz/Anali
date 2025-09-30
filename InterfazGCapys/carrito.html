@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapyShop - Carrito</title>
+  <!-- W3.CSS y Font Awesome -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffe6f0;
+    }
+
+    .capy-header {
+      background-color: #da6e92;
+      /* Pink */
+      color: rgb(250, 246, 249);
+    }
+
+    .capy-fondo {
+      background-color: #e8f5e9 !important;
+    }
+    
+    .capy-text {
+      color: #8d96ec !important;
+    }
+
+    .w3-hover-text-amber:hover {
+      color: #d371fa !important;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .contenedor-carrito {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .carrito-tabla {
+      flex: 2;
+    }
+    .carrito-tabla h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #da6e92;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffeaf1;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+
+    table th {
+      background-color: #d46b8b;
+      color: white;
+      font-weight: bold;
+    }
+
+    table tr:nth-child(even) {
+      background: #fff6f9;
+    }
+
+    table img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      margin-right: 15px;
+      vertical-align: middle;
+      display: inline-block;
+      object-fit: cover;
+      border: 2px solid #da6e92;
+      background-color: #f8f8f8;
+    }
+
+    .producto-info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    button {
+      background: #d46b8b;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #b75877;
+      opacity: 0.9;
+    }
+
+    .btn-eliminar {
+      background: #ff4d4d;
+    }
+
+    .btn-eliminar:hover {
+      background: #e63939;
+    }
+
+    input[type="text"] {
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 50px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .resumen {
+      flex: 1;
+      min-width: 250px;
+      background: #fff6f9;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .resumen p {
+      font-size: 1.2em;
+      margin: 0;
+    }
+
+    .resumen strong {
+      display: block;
+      font-size: 1.4em;
+      color: #b13e62;
+      text-align: center;
+    }
+
+    .resumen span {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #d46b8b;
+    }
+
+    .resumen a {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 1.1em;
+    }
+
+    .resumen a:first-of-type {
+      background: #d46b8b;
+      color: white;
+    }
+
+    .resumen a:first-of-type:hover {
+      background: #b75877;
+    }
+
+    .resumen a:last-of-type {
+      border: 2px solid #d46b8b;
+      color: #d46b8b;
+      background: white;
+    }
+
+    .resumen a:last-of-type:hover {
+      background: #ffeaf1;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 20px;
+      text-align: center;
+      background-color: #da6e92;
+      color: white;
+      font-size: 1.1em;
+    }
+
+    .imagen-placeholder {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #da6e92, #8d96ec);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    @media (max-width: 700px) {
+      .contenedor-carrito {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .resumen {
+        width: 100%;
+      }
+
+      table img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="w3-bar w3-border-bottom capy-header">
+    
+    <div class="w3-bar-item">
+      <h1 style="margin:0; font-size:24px;"> <b>CapyShop</b></h1>
+    </div>
+
+    <nav class="w3-right w3-hide-small">
+      <a href="vprincipal.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Inicio</a>
+      <a href="tienda.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Tienda</a>
+      <a href="favoritos.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber" title="Favoritos">
+        <i class="fas fa-heart"></i>
+      </a>
+      <div class="w3-dropdown-hover w3-hover-none">
+        <button class="w3-button w3-hover-none w3-hover-text-amber" title="Carrito">
+          <i class="fa fa-shopping-cart"></i>
+        </button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+          <a href="carrito.html" class="w3-bar-item w3-button">Mi carrito</a>
+          <a href="checkout.html" class="w3-bar-item w3-button">Checkout</a>
+        </div>
+      </div>
+      <div class="w3-dropdown-hover w3-hover-none">
+        <button class="w3-button w3-hover-none w3-hover-text-amber" title="Cuenta">
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+          <a href="cuenta.html" class="w3-bar-item w3-button">Mi perfil</a>
+          <a href="historial.html" class="w3-bar-item w3-button">Historial</a>
+          <a href="#" class="w3-bar-item w3-button" onclick="document.getElementById('logoutModal').style.display='block'">Cerrar sesión</a>        
+        </div>
+      </div>
+      <div class="w3-dropdown-hover w3-hover-none">
+        <button class="w3-button w3-hover-none w3-hover-text-amber">Contacto</button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+          <a href="info.html" class="w3-bar-item w3-button">Info</a>
+          <a href="faq.html" class="w3-bar-item w3-button">FAQ</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="contenedor-carrito">
+      <!-- Contenedor título + tabla -->
+      <div class="carrito-tabla">
+        <h2>Tu Carrito</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="producto-info">
+                  <img src="img/llavero2.jpg" alt="Llavero Capy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <div class="imagen-placeholder" style="display: none;">LLAVERO</div>
+                  <span>Llavero Capy</span>
+                </div>
+              </td>
+              <td>$12.99</td>
+              <td>
+                <button onclick="disminuir('cant1')">-</button>
+                <input type="text" id="cant1" value="1" readonly>
+                <button onclick="aumentar('cant1')">+</button>
+              </td>
+              <td id="total1">$12.99</td>
+              <td><button class="btn-eliminar">Eliminar</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="producto-info">
+                  <img src="img/playera1.jpg" alt="Playera Capy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <div class="imagen-placeholder" style="display: none;">PLAYERA</div>
+                  <span>Playera Capy</span>
+                </div>
+              </td>
+              <td>$18.50</td>
+              <td>
+                <button onclick="disminuir('cant2')">-</button>
+                <input type="text" id="cant2" value="1" readonly>
+                <button onclick="aumentar('cant2')">+</button>
+              </td>
+              <td id="total2">$18.50</td>
+              <td><button class="btn-eliminar">Eliminar</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="producto-info">
+                  <img src="img/taza3.jpg" alt="Taza Capy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <div class="imagen-placeholder" style="display: none;">TAZA</div>
+                  <span>Taza Capy</span>
+                </div>
+              </td>
+              <td>$9.99</td>
+              <td>
+                <button onclick="disminuir('cant3')">-</button>
+                <input type="text" id="cant3" value="1" readonly>
+                <button onclick="aumentar('cant3')">+</button>
+              </td>
+              <td id="total3">$9.99</td>
+              <td><button class="btn-eliminar">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Resumen -->
+      <div class="resumen">
+        <p><strong>Total carrito:</strong></p>
+        <span id="totalCarrito">$41.48</span>
+        <a href="checkout.html">Finalizar compra</a>
+        <a href="historial.html">Ver historial de compras</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CapyShop - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Modal de Cerrar Sesión -->
+  <div id="logoutModal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-round-large" style="max-width:400px;">
+      <header class="w3-container capy-header w3-center w3-round-top">
+        <h3><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</h3>
+      </header>
+      <div class="w3-container w3-padding">
+        <p>¿Seguro que quieres cerrar sesión?</p>
+      </div>
+      <div class="w3-container w3-center w3-padding">
+        <button class="w3-button w3-round-xxlarge w3-pink w3-margin-right"
+                onclick="window.location.href='vprincipal.html'">
+          Sí
+        </button>
+        <button class="w3-button w3-round-xxlarge w3-light-grey"
+                onclick="document.getElementById('logoutModal').style.display='none'">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function aumentar(id) {
+      let cantidad = document.getElementById(id);
+      cantidad.value = parseInt(cantidad.value) + 1;
+      actualizarTotales();
+    }
+
+    function disminuir(id) {
+      let cantidad = document.getElementById(id);
+      if (parseInt(cantidad.value) > 1) {
+        cantidad.value = parseInt(cantidad.value) - 1;
+        actualizarTotales();
+      }
+    }
+
+    function actualizarTotales() {
+      let precio1 = 12.99;
+      let precio2 = 18.50;
+      let precio3 = 9.99;
+
+      let cant1 = parseInt(document.getElementById("cant1").value);
+      let cant2 = parseInt(document.getElementById("cant2").value);
+      let cant3 = parseInt(document.getElementById("cant3").value);
+
+      let total1 = cant1 * precio1;
+      let total2 = cant2 * precio2;
+      let total3 = cant3 * precio3;
+
+      document.getElementById("total1").textContent = "$" + total1.toFixed(2);
+      document.getElementById("total2").textContent = "$" + total2.toFixed(2);
+      document.getElementById("total3").textContent = "$" + total3.toFixed(2);
+
+      let totalCarrito = total1 + total2 + total3;
+      document.getElementById("totalCarrito").textContent = "$" + totalCarrito.toFixed(2);
+    }
+
+    actualizarTotales();
+  </script>
+</body>
+</html>
