@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+</head>
+<body>
+  <div class="w3-bar w3-purple">
+
+    <div class="w3-right">
+    <button class="w3-bar-item w3-button" onclick="location.href='index.html'">Inicio</button>
+    <button class="w3-bar-item w3-button" onclick="location.href='Usuarios.html'">Usuarios</button>
+    <button class="w3-bar-item w3-button" onclick="location.href='Post.html'">Post</button>
+    <button class="w3-bar-item w3-button" onclick="location.href='Comentarios.html'">Comentarios</button>
+    </div>
+  
+</div>
+
+
+<div class="w3-center">
+<h2> JSON DATA FAKE </h2>
+</div>
+<!--BOTON BUSCAR-->
+<div class="w3-container w3-padding-16">
+     <input type="text" id="buscarUsuario" class="w3-input w3-border w3-round-large w3-quarter" placeholder="Buscar usuario...">
+     <!--BOTON AGREGAR-->
+    <button class="w3-button w3-purple w3-round-large w3-margin-left" onclick="agregarUsuario()"> Agregar Usuario </button>
+    <button class="w3-button w3-teal w3-round-large w3-margin-left" onclick="buscar()">Buscar</button>  
+</div>
+
+
+<div class="w3-container w3-padding-16">
+    <table class="w3-table-all">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tbl_users">
+    </tbody>
+</table>
+
+<!-- Modal para ver detalles del usuario -->
+  <div id="modal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4" style="max-width:500px">
+      <header class="w3-container w3-purple">
+        <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
+        <h3>Detalles del Usuario</h3>
+      </header>
+      <div class="w3-container" id="modal-body" style="padding:16px">
+        <!-- Datos dinámicos aquí -->
+      </div>
+      <footer class="w3-container w3-purple">
+        <p><button class="w3-button w3-right" onclick="closeModal()">Cerrar</button></p>
+      </footer>
+    </div>
+  </div>
+
+</div>
+<script src="Usuarios.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+
+// Editar usuario (formulario)
+async function editar(id) {
+  try {
+    const resp = await fetch(`/api/users/${id}`);
+    const user = await resp.json();
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+      <h4>Editar Usuario</h4>
+      <label>Nombre:</label>
+      <input class="w3-input w3-border" id="editName" value="${user.name}">
+      <label>Username:</label>
+      <input class="w3-input w3-border" id="editUsername" value="${user.username}">
+      <label>Email:</label>
+      <input class="w3-input w3-border" id="editEmail" value="${user.email}">
+      <br>
+      <button class="w3-button w3-green w3-round" onclick="guardarCambios(${user.id})">
+        Guardar Cambios
+      </button>
+    `;
+    document.getElementById('modal').style.display = 'block';
+  } catch (err) {
+    console.error("Error al editar usuario:", err);
+  }
+}
+
+async function guardarCambios(id) {
+  const name = document.getElementById('editName').value;
+  const username = document.getElementById('editUsername').value;
+  const email = document.getElementById('editEmail').value;
+  alert(`Usuario ${id} actualizado (simulación)`);
+  closeModal();
+  getData();
+}
+
+
+// Eliminar usuario (simulación)
+async function eliminar(id) {
+  if (!confirm(`¿Seguro que quieres eliminar al usuario ${id}?`)) return;
+
+  try {
+    // Simulación de DELETE
+    await fetch(`/api/users/${id}`, { method: "DELETE" });
+    alert(`Usuario ${id} eliminado (simulación)`);
+
+    // Eliminar visualmente la fila
+    const fila = document.getElementById(`fila-${id}`);
+    if (fila) fila.remove();
+  } catch (err) {
+    console.error("Error al eliminar usuario:", err);
+    alert("Error al eliminar usuario");
+  }
+}
+
+function agregarUsuario() {
+  const modalBody = document.getElementById('modal-body');
+  modalBody.innerHTML = `
+    <h4>Agregar Nuevo Usuario</h4>
+    <label>Nombre:</label>
+    <input class="w3-input w3-border" id="newName" placeholder="Nombre">
+    
+    <label>Username:</label>
+    <input class="w3-input w3-border" id="newUsername" placeholder="Username">
+    
+    <label>Email:</label>
+    <input class="w3-input w3-border" id="newEmail" placeholder="Email">
+    
+    <label>Teléfono:</label>
+    <input class="w3-input w3-border" id="newPhone" placeholder="Teléfono">
+    
+    <label>Website:</label>
+    <input class="w3-input w3-border" id="newWebsite" placeholder="Website">
+
+    <h5>Dirección</h5>
+    <label>Calle:</label>
+    <input class="w3-input w3-border" id="newStreet" placeholder="Calle">
+    <label>Suite:</label>
+    <input class="w3-input w3-border" id="newSuite" placeholder="Suite">
+    <label>Ciudad:</label>
+    <input class="w3-input w3-border" id="newCity" placeholder="Ciudad">
+    <label>Código Postal:</label>
+    <input class="w3-input w3-border" id="newZip" placeholder="Zipcode">
+
+    <h5>Coordenadas</h5>
+    <label>Latitud:</label>
+    <input class="w3-input w3-border" id="newLat" placeholder="Latitud">
+    <label>Longitud:</label>
+    <input class="w3-input w3-border" id="newLng" placeholder="Longitud">
+
+    <h5>Compañía</h5>
+    <label>Nombre:</label>
+    <input class="w3-input w3-border" id="newCompanyName" placeholder="Nombre de la compañía">
+    <label>Eslogan:</label>
+    <input class="w3-input w3-border" id="newCatchPhrase" placeholder="Catch Phrase">
+    <label>Actividad:</label>
+    <input class="w3-input w3-border" id="newBS" placeholder="Business Service">
+
+    <br>
+    <button class="w3-button w3-green w3-round" onclick="guardarNuevoUsuario()">
+      Guardar Usuario
+    </button>
+  `;
+  document.getElementById('modal').style.display = 'block';
+}
+
