@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapyShop - Finalizar Compra</title>
+
+  <!-- W3CSS y Font Awesome -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: whitesmoke; /* Fondo rosa */
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .capy-header {
+      background-color: #da6e92;
+      color: white;
+    }
+    
+    .capy-fondo {
+      background-color: #e8f5e9 !important;
+    }
+
+    .capy-text {
+      color: #8d96ec !important;
+    }
+
+    .w3-hover-text-amber:hover {
+      color: #d371fa !important;
+    }
+
+
+    .form-section {
+      background-color: white;
+      flex-grow: 1;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .form-section h2 {
+      color: #8d96ec;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .form-section label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-section input[type="text"],
+    .form-section input[type="number"],
+    .form-section select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .form-section input[type="submit"] {
+      background-color: #8d96ec;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-weight: 500;
+      width: 48%;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .form-section input[type="submit"]:hover {
+      background-color: #7a84da;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer {
+      background-color: #da6e92;
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    /* Flex para campos lado a lado */
+    .flex-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .flex-row > div {
+      flex: 1;
+    }
+
+    /* Campos de tarjeta ocultos */
+    .tarjeta-campos {
+      display: none;
+      margin-top: 10px;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+ <header class="w3-bar w3-border-bottom capy-header">
+        <div class="w3-bar-item">
+            <h1 style="margin:0; font-size:24px;"> <b>CapyShop</b></h1>
+        </div>
+
+        <!-- Elementos para navegacion-->
+
+        <nav class="w3-right w3-hide-small">
+            <a href="vprincipal.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Inicio</a>
+            <a href="tienda.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber ">Tienda</a>
+
+            <!--FAVORITOS-->
+            <a href="favoritos.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+
+            <div class="w3-dropdown-hover w3-hover-none"> <!-- Poner ICONO CARRITO-->
+                <button class="w3-button w3-hover-none w3-hover-text-amber" title="Carrito"><i
+                        class="fa fa-shopping-cart"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="carrito.html" class="w3-bar-item w3-button">Mi carrito</a>
+                    <a href="checkout.html" class="w3-bar-item w3-button">Checkout</a>
+                </div>
+            </div>
+
+            <div class="w3-dropdown-hover w3-hover-none"> <!-- Poner ICONO CUENTA-->
+                <button class="w3-button w3-hover-none w3-hover-text-amber" title="Cuenta"><i
+                        class="fas fa-user"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="cuenta.html" class="w3-bar-item w3-button">Mi perfil</a>
+                    <a href="historial.html" class="w3-bar-item w3-button">Historial</a>
+                    <a href="#" class="w3-bar-item w3-button" onclick="document.getElementById('logoutModal').style.display='block'">Cerrar sesión</a>                </div>
+            </div>
+
+            <div class="w3-dropdown-hover w3-hover-none">
+                <button class="w3-button w3-hover-none w3-hover-text-amber">Contacto</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="info.html" class="w3-bar-item w3-button">Info</a>
+                    <a href="faq.html" class="w3-bar-item w3-button">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+  <!-- FORMULARIO -->
+  <main class="form-section">
+    <h2>Datos de envío</h2>
+    <form action="#" method="post">
+
+      <!-- Nombre y Apellido -->
+      <div class="flex-row">
+        <div>
+          <label>Nombre(s):</label>
+          <input type="text" name="nombre" required>
+        </div>
+        <div>
+          <label>Apellido(s):</label>
+          <input type="text" name="apellido" required>
+        </div>
+      </div>
+
+      <!-- Dirección y Departamento -->
+      <div class="flex-row">
+        <div>
+          <label>Dirección de envío:</label>
+          <input type="text" name="direccion" required>
+        </div>
+        <div>
+          <label>Departamento:</label>
+          <input type="text" name="departamento" required>
+        </div>
+      </div>
+
+      <!-- Ciudad y Provincia -->
+      <div class="flex-row">
+        <div>
+          <label>Ciudad:</label>
+          <input type="text" name="ciudad" required>
+        </div>
+        <div>
+          <label>Provincia:</label>
+          <input type="text" name="provincia" required>
+        </div>
+      </div>
+
+      <!-- Código postal -->
+      <label>Código postal:</label>
+      <input type="text" name="codigop" required>
+
+      <!-- Método de pago -->
+      <label>Método de pago:</label>
+      <select name="pago" id="metodo-pago">
+        <option value="efectivo">Pago en efectivo (simulado)</option>
+        <option value="tarjeta">Tarjeta (simulado)</option>
+      </select>
+
+      <!-- Campos de tarjeta (ocultos) -->
+      <div class="tarjeta-campos" id="tarjeta-fields">
+        <label>Titular de la tarjeta:</label>
+        <input type="text" name="titular">
+
+        <label>Número de tarjeta:</label>
+        <input type="text" name="numero" maxlength="16">
+
+        <div class="flex-row">
+          <div>
+            <label>Fecha de expiración (MM/AA):</label>
+            <input type="text" name="expiracion" placeholder="MM/AA">
+          </div>
+          <div>
+            <label>CVV:</label>
+            <input type="number" name="cvv" maxlength="4">
+          </div>
+        </div>
+      </div>
+
+      <!-- Área de contacto y teléfono -->
+      <label>Área de contacto:</label>
+      
+      <label>Correo:</label>
+      <input type="text" name="correo" required>
+
+      <label>Teléfono:</label>
+      <input type="text" name="telefono" required>
+
+      <!-- Botones -->
+      <div class="form-buttons">
+        <input type="submit" value="Guardar datos">
+        <input type="submit" value="Confirmar pedido">
+      </div>
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 CapyShop • Proyecto AMF</p>
+  </footer>
+
+  <!-- Modal de Cerrar Sesión -->
+    <div id="logoutModal" class="w3-modal">
+        <div class="w3-modal-content w3-animate-top w3-round-large" style="max-width:400px;">
+            <header class="w3-container capy-header w3-center w3-round-top">
+                <h3><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</h3>
+            </header>
+            <div class="w3-container w3-padding">
+                <p>¿Seguro que quieres cerrar sesión?</p>
+            </div>
+            <div class="w3-container w3-center w3-padding">
+                <button class="w3-button w3-round-xxlarge w3-pink w3-margin-right"
+                        onclick="window.location.href='vprincipal.html'">
+                    Sí
+                </button>
+                <button class="w3-button w3-round-xxlarge w3-light-grey"
+                        onclick="document.getElementById('logoutModal').style.display='none'">
+                    No
+                </button>
+            </div>
+            
+  <script>
+    // Mostrar/ocultar campos de tarjeta según método de pago
+    const metodoPago = document.getElementById('metodo-pago');
+    const tarjetaFields = document.getElementById('tarjeta-fields');
+
+    metodoPago.addEventListener('change', () => {
+      if(metodoPago.value === 'tarjeta') {
+        tarjetaFields.style.display = 'block';
+      } else {
+        tarjetaFields.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>

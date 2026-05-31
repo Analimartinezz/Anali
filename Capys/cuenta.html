@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapyShop - Cuenta</title>
+
+  <!-- W3CSS y Font Awesome -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: white; /* Rosa de fondo */
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .capy-header {
+      background-color: #da6e92;
+      color: white;
+    }
+
+    .capy-fondo {
+      background-color: #e8f5e9 !important;
+    }
+
+    .capy-text {
+      color: #8d96ec !important;
+    }
+
+    .w3-hover-text-amber:hover {
+      color: #d371fa !important;
+    }
+
+    .form-container {
+      background-color: white;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .form-container h2 {
+      color: #8d96ec;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #8d96ec;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: background 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #7a84da;
+    }
+
+    /* Botones de switch */
+    .switch-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .switch-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      transition: background 0.3s;
+      font-weight: 500;
+    }
+
+    .switch-buttons button.active {
+      background-color: #8d96ec;
+      color: white;
+    }
+
+    .footer {
+      background-color: #da6e92;
+      color: white;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="w3-bar w3-border-bottom capy-header">
+        <div class="w3-bar-item">
+            <h1 style="margin:0; font-size:24px;"> <b>CapyShop</b></h1>
+        </div>
+
+        <!-- Elementos para navegacion-->
+
+        <nav class="w3-right w3-hide-small">
+            <a href="vprincipal.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Inicio</a>
+            <a href="tienda.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber ">Tienda</a>
+
+            <!--FAVORITOS-->
+            <a href="favoritos.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+
+            <div class="w3-dropdown-hover w3-hover-none"> <!-- Poner ICONO CARRITO-->
+                <button class="w3-button w3-hover-none w3-hover-text-amber" title="Carrito"><i
+                        class="fa fa-shopping-cart"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="carrito.html" class="w3-bar-item w3-button">Mi carrito</a>
+                    <a href="checkout.html" class="w3-bar-item w3-button">Checkout</a>
+                </div>
+            </div>
+
+            <div class="w3-dropdown-hover w3-hover-none"> <!-- Poner ICONO CUENTA-->
+                <button class="w3-button w3-hover-none w3-hover-text-amber" title="Cuenta"><i
+                        class="fas fa-user"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="cuenta.html" class="w3-bar-item w3-button">Mi perfil</a>
+                    <a href="historial.html" class="w3-bar-item w3-button">Historial</a>
+                    <a href="#" class="w3-bar-item w3-button" onclick="document.getElementById('logoutModal').style.display='block'">Cerrar sesión</a>                </div>
+            </div>
+
+            <div class="w3-dropdown-hover w3-hover-none">
+                <button class="w3-button w3-hover-none w3-hover-text-amber">Contacto</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="info.html" class="w3-bar-item w3-button">Info</a>
+                    <a href="faq.html" class="w3-bar-item w3-button">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+  <!-- SWITCH BOTONES -->
+  <div class="form-container">
+    <div class="switch-buttons">
+      <button id="btn-login" class="active">Iniciar sesión</button>
+      <button id="btn-register">Registrar</button>
+    </div>
+
+    <!-- FORMULARIO LOGIN -->
+    <form id="form-login">
+      <h2>Iniciar sesión</h2>
+      <label>Correo:</label>
+      <input type="email" name="correo" required>
+      <label>Contraseña:</label>
+      <input type="password" name="pass" required>
+      <input type="submit" value="Entrar">
+    </form>
+
+    <!-- FORMULARIO REGISTRO -->
+    <form id="form-register" class="hidden">
+      <h2>Registrar</h2>
+      <label>Nombre(s):</label>
+      <input type="text" name="nombre" required>
+      <label>Apellido(s):</label>
+      <input type="text" name="apellido" required>
+      <label>Correo:</label>
+      <input type="email" name="correo" required>
+      <label>Contraseña:</label>
+      <input type="password" name="pass" required>
+      <input type="submit" value="Crear cuenta">
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 CapyShop • Proyecto AMF</p>
+  </footer>
+
+    <!-- Modal de Cerrar Sesión -->
+    <div id="logoutModal" class="w3-modal">
+        <div class="w3-modal-content w3-animate-top w3-round-large" style="max-width:400px;">
+            <header class="w3-container capy-header w3-center w3-round-top">
+                <h3><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</h3>
+            </header>
+            <div class="w3-container w3-padding">
+                <p>¿Seguro que quieres cerrar sesión?</p>
+            </div>
+            <div class="w3-container w3-center w3-padding">
+                <button class="w3-button w3-round-xxlarge w3-pink w3-margin-right"
+                        onclick="window.location.href='vprincipal.html'">
+                    Sí
+                </button>
+                <button class="w3-button w3-round-xxlarge w3-light-grey"
+                        onclick="document.getElementById('logoutModal').style.display='none'">
+                    No
+                </button>
+            </div>
+
+  <script>
+    const btnLogin = document.getElementById('btn-login');
+    const btnRegister = document.getElementById('btn-register');
+    const formLogin = document.getElementById('form-login');
+    const formRegister = document.getElementById('form-register');
+
+    btnLogin.addEventListener('click', () => {
+      btnLogin.classList.add('active');
+      btnRegister.classList.remove('active');
+      formLogin.classList.remove('hidden');
+      formRegister.classList.add('hidden');
+    });
+
+    btnRegister.addEventListener('click', () => {
+      btnRegister.classList.add('active');
+      btnLogin.classList.remove('active');
+      formRegister.classList.remove('hidden');
+      formLogin.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html>

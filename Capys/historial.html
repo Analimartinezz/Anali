@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Compras</title>
+  <!-- W3.CSS y Font Awesome para iconos y estilos dropdown -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fff5f8;
+    }
+
+    .capy-header {
+      background-color: #da6e92;
+      /* Pink */
+      color: rgb(250, 246, 249);
+    }
+
+    .capy-fondo {
+      background-color: #e8f5e9 !important;
+    }
+    
+    .capy-text {
+      color: #8d96ec !important;
+    }
+
+    .w3-hover-text-amber:hover {
+      color: #d371fa !important;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    /* Contenedor para título y tabla */
+    .historial-tabla {
+      max-width: 1000px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .historial-tabla h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #da6e92;
+      font-size: 1.8em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffeaf1;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    table th, table td {
+      padding: 15px;
+      text-align: center;
+      vertical-align: middle;
+      border-bottom: 1px solid #f5c1d3;
+    }
+
+    table th {
+      background-color: #d46b8b;
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
+    }
+
+    table tr:nth-child(even) {
+      background: #fff6f9;
+    }
+
+    table tr:hover {
+      background: #ffe0eb;
+    }
+
+    /* Estilos para imágenes */
+    .producto-historial {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+
+    .producto-historial img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid #da6e92;
+      background-color: #f8f8f8;
+    }
+
+    .producto-info {
+      text-align: left;
+    }
+
+    .producto-nombre {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .producto-detalles {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    /* Estrellas de calificación */
+    .rating-stars {
+      color: #FFC107;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+
+    .comentario {
+      font-size: 0.9em;
+      color: #555;
+      font-style: italic;
+      max-width: 150px;
+      margin: 0 auto;
+    }
+
+    .precio {
+      font-weight: bold;
+      color: #d46b8b;
+      font-size: 1.1em;
+    }
+
+    .fecha {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .descuento {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      color: #da6e92;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: #da6e92;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .imagen-placeholder {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #da6e92, #8d96ec);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
+
+    @media (max-width: 768px) {
+      .historial-tabla {
+        padding: 10px;
+        margin: 10px;
+      }
+      
+      table {
+        font-size: 0.9em;
+      }
+      
+      table th, table td {
+        padding: 8px;
+      }
+      
+      .producto-historial img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="w3-bar w3-border-bottom capy-header">
+    
+    <div class="w3-bar-item">
+      <h1 style="margin:0; font-size:24px;"> <b>CapyShop</b></h1>
+    </div>
+
+    <nav class="w3-right w3-hide-small">
+      <a href="vprincipal.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Inicio</a>
+      <a href="tienda.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Tienda</a>
+
+      <!-- Favoritos -->
+      <a href="favoritos.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber" title="Favoritos">
+        <i class="fas fa-heart"></i>
+      </a>
+
+      <!-- Carrito -->
+      <div class="w3-dropdown-hover w3-hover-none">
+        <button class="w3-button w3-hover-none w3-hover-text-amber" title="Carrito">
+          <i class="fa fa-shopping-cart"></i>
+        </button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+          <a href="carrito.html" class="w3-bar-item w3-button">Mi carrito</a>
+          <a href="checkout.html" class="w3-bar-item w3-button">Checkout</a>
+        </div>
+      </div>
+
+      <!-- Cuenta -->
+      <div class="w3-dropdown-hover w3-hover-none">
+        <button class="w3-button w3-hover-none w3-hover-text-amber" title="Cuenta">
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+          <a href="cuenta.html" class="w3-bar-item w3-button">Mi perfil</a>
+          <a href="historial.html" class="w3-bar-item w3-button">Historial</a>
+          <a href="#" class="w3-bar-item w3-button" onclick="document.getElementById('logoutModal').style.display='block'">Cerrar sesión</a>
+        </div>
+      </div>
+
+      <!-- Contacto -->
+      <div class="w3-dropdown-hover w3-hover-none">
+        <button class="w3-button w3-hover-none w3-hover-text-amber">Contacto</button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+          <a href="info.html" class="w3-bar-item w3-button">Info</a>
+          <a href="faq.html" class="w3-bar-item w3-button">FAQ</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="historial-tabla">
+      <h2>Historial de Compras</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Detalles</th>
+            <th>Descuento</th>
+            <th>Calificación</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="producto-historial">
+                <img src="img/playera1.jpg" alt="Playera Capy Feliz" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="imagen-placeholder" style="display: none;">PLAYERA</div>
+                <div class="producto-info">
+                  <div class="producto-nombre">Playera Capy Feliz</div>
+                  <div class="producto-detalles">Talla M</div>
+                </div>
+              </div>
+            </td>
+            <td>Color blanco, 100% algodón</td>
+            <td class="descuento">10%</td>
+            <td>
+              <div class="rating-stars">⭐⭐⭐⭐☆</div>
+              <div class="comentario">Muy cómoda y suave</div>
+            </td>
+            <td class="precio">$250</td>
+            <td class="fecha">12/09/2025</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="producto-historial">
+                <img src="img/taza3.jpg" alt="Taza Capy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="imagen-placeholder" style="display: none;">TAZA</div>
+                <div class="producto-info">
+                  <div class="producto-nombre">Taza Capy</div>
+                  <div class="producto-detalles">350ml</div>
+                </div>
+              </div>
+            </td>
+            <td>Cerámica, diseño exclusivo</td>
+            <td>-</td>
+            <td>
+              <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+              <div class="comentario">Me encantó el diseño</div>
+            </td>
+            <td class="precio">$150</td>
+            <td class="fecha">03/08/2025</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="producto-historial">
+                <img src="img/llavero2.jpg" alt="Llavero Capy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="imagen-placeholder" style="display: none;">LLAVERO</div>
+                <div class="producto-info">
+                  <div class="producto-nombre">Llavero Capy</div>
+                  <div class="producto-detalles">Acrílico</div>
+                </div>
+              </div>
+            </td>
+            <td>Diseño transparente, resistente</td>
+            <td class="descuento">5%</td>
+            <td>
+              <div class="rating-stars">⭐⭐⭐☆☆</div>
+              <div class="comentario">Bueno pero pequeño</div>
+            </td>
+            <td class="precio">$80</td>
+            <td class="fecha">25/07/2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section>
+      
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CapyShop - Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Modal de Cerrar Sesión -->
+  <div id="logoutModal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-round-large" style="max-width:400px;">
+      <header class="w3-container capy-header w3-center w3-round-top">
+        <h3><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</h3>
+      </header>
+      <div class="w3-container w3-padding">
+        <p>¿Seguro que quieres cerrar sesión?</p>
+      </div>
+      <div class="w3-container w3-center w3-padding">
+        <button class="w3-button w3-round-xxlarge w3-pink w3-margin-right"
+                onclick="window.location.href='vprincipal.html'">
+          Sí
+        </button>
+        <button class="w3-button w3-round-xxlarge w3-light-grey"
+                onclick="document.getElementById('logoutModal').style.display='none'">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
