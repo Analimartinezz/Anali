@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapyShop - FAQ</title>
+    <!-- W3.CSS y Font Awesome -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .capy-fondo {
+            background-color: #ffeaf1;
+        }
+
+        /* HEADER ROSA UNIFICADO */
+        header {
+            background-color: #da6e92; /* igual que footer */
+            color: rgb(250, 246, 249);
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            display: inline-block;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .capy-fondo {
+            background-color: #e8f5e9 !important;
+        }
+
+        .capy-text {
+            color:  #8d96ec !important;
+        }
+
+        .w3-hover-text-amber:hover {
+            color: #d371fa !important; /* más visible sobre rosa */
+        }
+
+
+        /* Contenido */
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #8d96ec;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: #da6e92;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        footer {
+            background-color: #da6e92;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: auto;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    
+    <header class="w3-bar w3-padding w3-card">
+        <h1>CapyShop</h1>
+        <nav class="w3-right w3-hide-small">
+            <a href="vprincipal.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Inicio</a>
+            <a href="tienda.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber">Tienda</a>
+
+            <!-- Favoritos -->
+            <a href="favoritos.html" class="w3-bar-item w3-button w3-hover-none w3-hover-text-amber" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+
+            <!-- Carrito -->
+            <div class="w3-dropdown-hover w3-hover-none">
+                <button class="w3-button w3-hover-none w3-hover-text-amber" title="Carrito">
+                    <i class="fa fa-shopping-cart"></i>
+                </button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="carrito.html" class="w3-bar-item w3-button">Mi carrito</a>
+                    <a href="checkout.html" class="w3-bar-item w3-button">Checkout</a>
+                </div>
+            </div>
+
+            
+            <div class="w3-dropdown-hover w3-hover-none">
+                <button class="w3-button w3-hover-none w3-hover-text-amber" title="Cuenta">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="cuenta.html" class="w3-bar-item w3-button">Mi perfil</a>
+                    <a href="historial.html" class="w3-bar-item w3-button">Historial</a>
+                    <a href="#" class="w3-bar-item w3-button" onclick="document.getElementById('logoutModal').style.display='block'">Cerrar sesión</a>                </div>
+            </div>
+
+           
+            <div class="w3-dropdown-hover w3-hover-none">
+                <button class="w3-button w3-hover-none w3-hover-text-amber">Contacto</button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4 capy-fondo">
+                    <a href="info.html" class="w3-bar-item w3-button">Info</a>
+                    <a href="faq.html" class="w3-bar-item w3-button">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main>
+        <h2>Preguntas frecuentes</h2>
+
+        <h3>¿Venden capibaras reales?</h3>
+        <p>No. Solo vendemos productos inspirados en capybaras.</p>
+
+        <h3>¿Cómo hago devoluciones?</h3>
+        <p>Este proyecto es una demo; las políticas reales se añadirán cuando la tienda esté en producción.</p>
+
+        
+        <h3>¿Cuál es el tiempo de envío?</h3>
+        <p>El envío depende de la ubicación, pero usualmente tarda entre 5 y 10 días hábiles.</p>
+
+        <h3>¿Puedo combinar descuentos?</h3>
+        <p>No, actualmente cada promoción o descuento se aplica de manera individual por producto.</p>
+    </main>
+
+   
+    <footer>
+        <p>© 2025 CapyShop</p>
+    </footer>
+
+    <!-- Modal de Cerrar Sesión -->
+    <div id="logoutModal" class="w3-modal">
+        <div class="w3-modal-content w3-animate-top w3-round-large" style="max-width:400px;">
+            <header class="w3-container capy-header w3-center w3-round-top">
+                <h3><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</h3>
+            </header>
+            <div class="w3-container w3-padding">
+                <p>¿Seguro que quieres cerrar sesión?</p>
+            </div>
+            <div class="w3-container w3-center w3-padding">
+                <button class="w3-button w3-round-xxlarge w3-pink w3-margin-right"
+                        onclick="window.location.href='vprincipal.html'">
+                    Sí
+                </button>
+                <button class="w3-button w3-round-xxlarge w3-light-grey"
+                        onclick="document.getElementById('logoutModal').style.display='none'">
+                    No
+                </button>
+            </div>
+</body>
+</html>

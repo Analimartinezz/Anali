@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="w3-bar w3-purple">
+    <div class="w3-right">
+      <button class="w3-bar-item w3-button" onclick="location.href='Usuarios.html'">Usuarios</button>
+      <button class="w3-bar-item w3-button" onclick="location.href='Post.html'">Post</button>
+      <button class="w3-bar-item w3-button" onclick="location.href='Comentarios.html'">Comentarios</button>
+    </div>
+  </div>
+
+  <div class="w3-center">
+    <h2> JSON DATA FAKE - POSTS </h2>
+  </div>
+
+  <!-- Buscar y agregar -->
+  <div class="w3-container w3-padding-16">
+    <input type="text" id="buscarPost" class="w3-input w3-border w3-round-large w3-quarter" placeholder="Buscar título...">
+    <button class="w3-button w3-purple w3-round-large w3-margin-left" onclick="agregarPost()">Agregar Post</button>
+    <button class="w3-button w3-teal w3-round-large w3-margin-left" onclick="buscar()">Buscar</button>
+  </div>
+
+  <div class="w3-container w3-padding-16">
+    <table class="w3-table-all">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tbl_posts"></tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="w3-center w3-margin-top">
+      <button class="w3-button w3-purple w3-round" onclick="cambiarPagina(-1)">⟨ Anterior</button>
+      <span id="paginaActual" class="w3-margin"></span>
+      <button class="w3-button w3-purple w3-round" onclick="cambiarPagina(1)">Siguiente ⟩</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="w3-modal">
+      <div class="w3-modal-content w3-animate-top w3-card-4" style="max-width:500px">
+        <header class="w3-container w3-purple">
+          <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
+          <h3>Detalles del Post</h3>
+        </header>
+        <div class="w3-container" id="modal-body" style="padding:16px"></div>
+        <footer class="w3-container w3-purple">
+          <p><button class="w3-button w3-right" onclick="closeModal()">Cerrar</button></p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let posts = [];
+  let filtrados = [];
+  let pagina = 1;
+  const porPagina = 10; // menos por post para que se vea mejor
+
+  window.onload = function() {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(datosjson => {
+        posts = datosjson;
+        filtrados = posts;
+        mostrarPagina(pagina);
+      });
+  }
+
+  function mostrarPagina(numPagina) {
+    const totalPaginas = Math.ceil(filtrados.length / porPagina);
+    if (numPagina < 1) numPagina = 1;
+    if (numPagina > totalPaginas) numPagina = totalPaginas;
+
+    const inicio = (numPagina - 1) * porPagina;
+    const fin = inicio + porPagina;
+    const datosPagina = filtrados.slice(inicio, fin);
+
+    let s = "";
+    datosPagina.forEach(element => {
+      s += `
+        <tr>
+          <td>${element.userId}</td>
+          <td>${element.id}</td>
+          <td>${element.title}</td>
+          <td>
+            <button class="w3-button w3-indigo" onclick="verDetalles(${element.id})">Ver</button>
+            <button class="w3-button w3-pink" onclick="editar(${element.id})">Editar</button>
+            <button class="w3-button w3-red" onclick="eliminar(${element.id})">Eliminar</button>
+          </td>
+        </tr>
+      `;
+    });
+    document.getElementById("tbl_posts").innerHTML = s;
+    document.getElementById("paginaActual").innerText = `Página ${numPagina} de ${totalPaginas}`;
+    pagina = numPagina;
+  }
+
+  function cambiarPagina(direccion) {
+    mostrarPagina(pagina + direccion);
+  }
+
+  function buscar() {
+    const texto = document.getElementById("buscarPost").value.toLowerCase();
+    filtrados = posts.filter(p => p.title.toLowerCase().includes(texto));
+    pagina = 1;
+    mostrarPagina(pagina);
+  }
+
+  function agregarPost() {
+    alert("Aquí iría la lógica para agregar un nuevo post ");
+  }
+
+  function verDetalles(id) {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(response => response.json())
+      .then(post => {
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+          <p><strong>ID:</strong> ${post.id}</p>
+          <p><strong>User ID:</strong> ${post.userId}</p>
+          <p><strong>Título:</strong> ${post.title}</p>
+          <p><strong>Contenido:</strong><br>${post.body}</p>
+        `;
+        document.getElementById('modal').style.display = 'block';
+      });
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+
+  function editar(id) {
+    alert("Editar post ID: " + id);
+  }
+
+  function eliminar(id) {
+    if(confirm("¿Deseas eliminar el post ID: " + id + "?")) {
+      alert("Post eliminado: " + id);
+    }
+  }
+</script>
+</body>
+</html>
